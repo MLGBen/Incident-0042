@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-black text-white">
@@ -146,12 +148,17 @@ export default function Home() {
                 been compromised.
               </p>
 
-              <button className="mt-6 bg-white text-black px-6 py-3 font-semibold hover:bg-zinc-200">
-                ACCEPT CASE →
-              </button>
-            </div>
+<Link
+  href="/incidents/0042"
+  className="inline-block mt-6 bg-white text-black px-6 py-3 font-semibold hover:bg-zinc-200"
+>
+  ACCEPT CASE →
+</Link>
 
-          </div>
+      
+    </div>
+
+</div>
 
           {/* ANALYST STATUS */}
           <div className="max-w-4xl mt-8 grid grid-cols-3 gap-4">
