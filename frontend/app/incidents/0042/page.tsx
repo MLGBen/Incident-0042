@@ -33,6 +33,7 @@ export default function Incident0042Page() {
         "user jsmith       Inspect employee account",
         "auth jsmith       Review authentication logs",
         "timeline          Display incident timeline",
+        "ip <address>      Investigate a source IP address",
         "evidence          Display collected evidence",
         "clear             Clear terminal",
       ];
@@ -78,7 +79,30 @@ export default function Incident0042Page() {
         "E-002 — Suspicious authentication sequence",
       ];
     }
+    if (input === "ip 185.234.xxx.xxx") {
+      discoverEvidence("E-004 — Suspicious external source IP");
 
+      return [
+        "IP INTELLIGENCE REPORT",
+        "",
+        "Address:       185.234.XXX.XXX",
+        "Reputation:    SUSPICIOUS",
+        "Network Type:  Hosting / VPS",
+        "Risk Level:    HIGH",
+        "",
+        "LOGIN HISTORY CORRELATION",
+        "",
+        "No previous Jordan Smith authentication",
+        "has been observed from this network.",
+        "",
+        "[!] THREAT INDICATOR",
+        "Source network is inconsistent with",
+        "the employee's normal authentication history.",
+        "",
+        "[+] EVIDENCE DISCOVERED",
+        "E-004 — Suspicious external source IP",
+      ];
+    }
     if (input === "timeline") {
       discoverEvidence("E-003 — Authentication timeline");
 
