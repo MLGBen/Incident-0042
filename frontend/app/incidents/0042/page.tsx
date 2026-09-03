@@ -36,6 +36,7 @@ export default function Incident0042Page() {
         "ip <address>      Investigate a source IP address",
         "endpoint jsmith   Inspect endpoint/device telemetry",
         "mfa jsmith        Analyze MFA challenge activity",
+        "geo jsmith        Correlate login geography",
         "evidence          Display collected evidence",
         "clear             Clear terminal",
       ];
@@ -180,6 +181,33 @@ if (input === "mfa jsmith") {
     "",
     "[+] EVIDENCE DISCOVERED",
     "E-006 — MFA fatigue pattern",
+  ];
+}
+
+if (input === "geo jsmith") {
+  discoverEvidence("E-007 — Geographic login anomaly");
+
+  return [
+    "LOGIN GEOGRAPHY CORRELATION — JSMITH",
+    "",
+    "Normal Login Region:",
+    "  Arlington, Virginia, USA",
+    "",
+    "Last Known Legitimate Activity:",
+    "  02:58 — Arlington, Virginia, USA",
+    "",
+    "Suspicious Authentication:",
+    "  03:22 — Amsterdam, Netherlands",
+    "",
+    "Elapsed Time: 24 minutes",
+    "",
+    "[!] IMPOSSIBLE TRAVEL INDICATOR",
+    "The geographic distance between the two",
+    "authentication events is not physically",
+    "possible within the observed time window.",
+    "",
+    "[+] EVIDENCE DISCOVERED",
+    "E-007 — Geographic login anomaly",
   ];
 }
 
