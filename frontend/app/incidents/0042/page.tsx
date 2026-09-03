@@ -1,4 +1,160 @@
+"use client";
+
+import { FormEvent, useState } from "react";
+
+type TerminalEntry = {
+  command: string;
+  output: string[];
+};
+
 export default function Incident0042Page() {
+  const [command, setCommand] = useState("");
+  const [history, setHistory] = useState<TerminalEntry[]>([]);
+  const [evidence, setEvidence] = useState<string[]>([]);
+
+  const discoverEvidence = (item: string) => {
+    setEvidence((current) => {
+      if (current.includes(item)) {
+        return current;
+      }
+
+      return [...current, item];
+    });
+  };
+
+  const executeCommand = (rawCommand: string): string[] => {
+    const input = rawCommand.trim().toLowerCase();
+
+    if (input === "help") {
+      return [
+        "INCIDENT 0042 COMMAND REFERENCE",
+        "",
+        "help              Show available commands",
+        "user jsmith       Inspect employee account",
+        "auth jsmith       Review authentication logs",
+        "timeline          Display incident timeline",
+        "evidence          Display collected evidence",
+        "clear             Clear terminal",
+      ];
+    }
+
+    if (input === "user jsmith") {
+      discoverEvidence("E-001 — Employee account profile");
+
+      return [
+        "USER RECORD — JSMITH",
+        "",
+        "Name:        Jordan Smith",
+        "Department:  Finance",
+        "Role:        Senior Financial Analyst",
+        "Account:     ACTIVE",
+        "MFA:         ENABLED",
+        "",
+        "[+] EVIDENCE DISCOVERED",
+        "E-001 — Employee account profile",
+      ];
+    }
+
+    if (input === "auth jsmith") {
+      discoverEvidence("E-002 — Suspicious authentication sequence");
+
+      return [
+        "AUTHENTICATION LOG — JSMITH",
+        "",
+        "03:14  FAILED_LOGIN",
+        "03:15  FAILED_LOGIN",
+        "03:17  FAILED_LOGIN",
+        "03:18  MFA_DENIED",
+        "03:20  MFA_DENIED",
+        "03:22  MFA_ACCEPTED",
+        "03:22  LOGIN_SUCCESSFUL",
+        "",
+        "SOURCE IP: 185.234.XXX.XXX",
+        "",
+        "[!] ANOMALY DETECTED",
+        "Multiple MFA denials preceded a successful authentication.",
+        "",
+        "[+] EVIDENCE DISCOVERED",
+        "E-002 — Suspicious authentication sequence",
+      ];
+    }
+
+    if (input === "timeline") {
+      discoverEvidence("E-003 — Authentication timeline");
+
+      return [
+        "INCIDENT TIMELINE",
+        "",
+        "03:14  First failed password attempt",
+        "03:15  Second failed password attempt",
+        "03:17  Third failed password attempt",
+        "03:18  MFA request denied",
+        "03:20  MFA request denied",
+        "03:22  MFA request accepted",
+        "03:22  Successful login recorded",
+        "",
+        "[+] EVIDENCE DISCOVERED",
+        "E-003 — Authentication timeline",
+      ];
+    }
+
+    if (input === "evidence") {
+      if (evidence.length === 0) {
+        return [
+          "EVIDENCE LOCKER",
+          "",
+          "No evidence has been collected.",
+          "Investigate the case to discover evidence.",
+        ];
+      }
+
+      return [
+        "EVIDENCE LOCKER",
+        "",
+        ...evidence,
+        "",
+        `${evidence.length} evidence item(s) collected.`,
+      ];
+    }
+
+    if (input === "") {
+      return [];
+    }
+
+    return [
+      `Command not recognized: ${rawCommand}`,
+      'Type "help" to view available commands.',
+    ];
+  };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const trimmedCommand = command.trim();
+
+    if (!trimmedCommand) {
+      return;
+    }
+
+    if (trimmedCommand.toLowerCase() === "clear") {
+      setHistory([]);
+      setCommand("");
+      return;
+    }
+
+    const output = executeCommand(trimmedCommand);
+
+    setHistory((current) => [
+      ...current,
+      {
+        command: trimmedCommand,
+        output,
+      },
+    ]);
+
+    setCommand("");
+  };
+
   return (
     <main className="min-h-screen bg-black text-white">
       <header className="border-b border-zinc-800 px-8 py-5 flex items-center justify-between">
@@ -6,6 +162,7 @@ export default function Incident0042Page() {
           <h1 className="text-2xl font-bold tracking-[0.2em]">
             INCIDENT 0042
           </h1>
+
           <p className="text-xs text-zinc-500 mt-1 tracking-widest">
             ACTIVE INVESTIGATION
           </p>
@@ -59,7 +216,7 @@ export default function Incident0042Page() {
                 </p>
               </div>
 
-              <div className="p-6 font-mono min-h-[420px]">
+              <div className="p-6 font-mono min-h-[520px] max-h-[650px] overflow-y-auto">
                 <p className="text-green-500">
                   INCIDENT 0042 ANALYST TERMINAL
                 </p>
@@ -68,12 +225,57 @@ export default function Incident0042Page() {
                   Type &quot;help&quot; to view available commands.
                 </p>
 
-                <div className="mt-8">
-                  <span className="text-green-500">
+                <div className="mt-6 space-y-6">
+                  {history.map((entry, index) => (
+                    <div key={index}>
+                      <div>
+                        <span className="text-green-500">
+                          analyst@incident0042:~$
+                        </span>
+
+                        <span className="text-white ml-2">
+                          {entry.command}
+                        </span>
+                      </div>
+
+                      <div className="mt-2 text-zinc-300">
+                        {entry.output.map((line, lineIndex) => (
+                          <div
+                            key={lineIndex}
+                            className={
+                              line.startsWith("[!]")
+                                ? "text-yellow-400"
+                                : line.startsWith("[+]")
+                                  ? "text-green-400"
+                                  : ""
+                            }
+                          >
+                            {line || "\u00A0"}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <form
+                  onSubmit={handleSubmit}
+                  className="mt-6 flex items-center"
+                >
+                  <span className="text-green-500 whitespace-nowrap">
                     analyst@incident0042:~$
                   </span>
-                  <span className="ml-2 animate-pulse">█</span>
-                </div>
+
+                  <input
+                    value={command}
+                    onChange={(event) => setCommand(event.target.value)}
+                    autoFocus
+                    autoComplete="off"
+                    spellCheck={false}
+                    aria-label="Investigation terminal command"
+                    className="ml-2 flex-1 bg-transparent text-white outline-none caret-green-500"
+                  />
+                </form>
               </div>
             </div>
 
@@ -94,7 +296,9 @@ export default function Incident0042Page() {
                   EVIDENCE DISCOVERED
                 </p>
 
-                <p className="text-3xl mt-3">0 / 8</p>
+                <p className="text-3xl mt-3">
+                  {evidence.length} / 8
+                </p>
               </div>
 
               <div className="border border-zinc-800 p-6">
@@ -104,6 +308,17 @@ export default function Incident0042Page() {
 
                 <p className="text-yellow-500 mt-3">
                   INVESTIGATING
+                </p>
+              </div>
+
+              <div className="border border-zinc-800 p-6">
+                <p className="text-xs text-zinc-600 tracking-widest">
+                  ANALYST NOTE
+                </p>
+
+                <p className="mt-4 text-sm text-zinc-400 leading-6">
+                  Start with the account and authentication activity.
+                  Correlate evidence before reaching a conclusion.
                 </p>
               </div>
             </div>
