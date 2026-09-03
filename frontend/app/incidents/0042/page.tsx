@@ -37,6 +37,7 @@ export default function Incident0042Page() {
         "endpoint jsmith   Inspect endpoint/device telemetry",
         "mfa jsmith        Analyze MFA challenge activity",
         "geo jsmith        Correlate login geography",
+        "session jsmith    Review post-authentication activity",
         "evidence          Display collected evidence",
         "clear             Clear terminal",
       ];
@@ -208,6 +209,29 @@ if (input === "geo jsmith") {
     "",
     "[+] EVIDENCE DISCOVERED",
     "E-007 — Geographic login anomaly",
+  ];
+}
+
+if (input === "session jsmith") {
+  discoverEvidence("E-008 — Suspicious post-authentication activity");
+
+  return [
+    "SESSION ACTIVITY — JSMITH",
+    "",
+    "03:22  LOGIN_SUCCESSFUL",
+    "03:24  MAILBOX_ACCESSED",
+    "03:25  INBOX_RULE_CREATED",
+    "03:27  FINANCE_FILES_ACCESSED",
+    "",
+    "[!] POST-AUTHENTICATION ACTIVITY",
+    "Sensitive resources were accessed immediately",
+    "after the suspicious authentication.",
+    "",
+    "Activity originated from the same unrecognized",
+    "device and suspicious external network.",
+    "",
+    "[+] EVIDENCE DISCOVERED",
+    "E-008 — Suspicious post-authentication activity",
   ];
 }
 
