@@ -34,6 +34,8 @@ export default function Incident0042Page() {
         "auth jsmith       Review authentication logs",
         "timeline          Display incident timeline",
         "ip <address>      Investigate a source IP address",
+        "endpoint jsmith   Inspect endpoint/device telemetry",
+        "mfa jsmith        Analyze MFA challenge activity",
         "evidence          Display collected evidence",
         "clear             Clear terminal",
       ];
@@ -122,7 +124,66 @@ export default function Incident0042Page() {
       ];
     }
 
-    if (input === "evidence") {
+    
+
+if (input === "endpoint jsmith") {
+  discoverEvidence("E-005 — Unknown authentication device");
+
+  return [
+    "ENDPOINT TELEMETRY — JSMITH",
+    "",
+    "Assigned Device: FIN-WS-042",
+    "Operating System: Windows 11",
+    "EDR Status: ONLINE",
+    "Last Seen: 03:11",
+    "",
+    "AUTHENTICATION DEVICE CORRELATION",
+    "",
+    "Successful login at 03:22 did NOT originate",
+    "from Jordan Smith's assigned workstation.",
+    "",
+    "Observed Device:",
+    "Browser:    Chrome",
+    "OS:         Linux",
+    "Device ID:  UNKNOWN",
+    "",
+    "[!] DEVICE MISMATCH",
+    "Authentication originated from an",
+    "unrecognized endpoint.",
+    "",
+    "[+] EVIDENCE DISCOVERED",
+    "E-005 — Unknown authentication device",
+  ];
+}
+
+
+if (input === "mfa jsmith") {
+  discoverEvidence("E-006 — MFA fatigue pattern");
+
+  return [
+    "MFA CHALLENGE ANALYSIS — JSMITH",
+    "",
+    "03:18  PUSH DENIED",
+    "03:20  PUSH DENIED",
+    "03:22  PUSH ACCEPTED",
+    "",
+    "Challenge Pattern: REPEATED",
+    "Time Window:        4 minutes",
+    "Final Result:       ACCEPTED",
+    "",
+    "[!] MFA FATIGUE INDICATOR",
+    "Multiple unsolicited MFA challenges were",
+    "sent before a final request was accepted.",
+    "",
+    "This pattern is consistent with MFA fatigue",
+    "or push-bombing activity.",
+    "",
+    "[+] EVIDENCE DISCOVERED",
+    "E-006 — MFA fatigue pattern",
+  ];
+}
+
+if (input === "evidence") {
       if (evidence.length === 0) {
         return [
           "EVIDENCE LOCKER",
