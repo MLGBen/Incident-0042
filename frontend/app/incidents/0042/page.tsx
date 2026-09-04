@@ -11,6 +11,7 @@ export default function Incident0042Page() {
   const [command, setCommand] = useState("");
   const [history, setHistory] = useState<TerminalEntry[]>([]);
   const [evidence, setEvidence] = useState<string[]>([]);
+  const [caseStatus, setCaseStatus] = useState("INVESTIGATING");
 
   const discoverEvidence = (item: string) => {
     setEvidence((current) => {
@@ -38,6 +39,7 @@ export default function Incident0042Page() {
         "mfa jsmith        Analyze MFA challenge activity",
         "geo jsmith        Correlate login geography",
         "session jsmith    Review post-authentication activity",
+        "conclude          Submit final case conclusion",
         "evidence          Display collected evidence",
         "clear             Clear terminal",
       ];
@@ -232,6 +234,47 @@ if (input === "session jsmith") {
     "",
     "[+] EVIDENCE DISCOVERED",
     "E-008 — Suspicious post-authentication activity",
+  ];
+}
+
+if (input === "conclude") {
+  if (evidence.length < 8) {
+    return [
+      "CASE CONCLUSION",
+      "",
+      "[!] INSUFFICIENT EVIDENCE",
+      `Evidence collected: ${evidence.length} / 8`,
+      "",
+      "Complete the investigation before",
+      "submitting a final conclusion.",
+    ];
+  }
+
+  setCaseStatus("COMPROMISED — MFA FATIGUE");
+
+  return [
+    "CASE CONCLUSION — INCIDENT 0042",
+    "",
+    "[+] ACCOUNT COMPROMISE CONFIRMED",
+    "",
+    "User:          Jordan Smith (jsmith)",
+    "Attack Method: MFA FATIGUE / PUSH BOMBING",
+    "Result:        UNAUTHORIZED ACCESS",
+    "",
+    "The attacker obtained valid credentials and",
+    "repeatedly triggered MFA challenges.",
+    "",
+    "After multiple denied requests, an MFA",
+    "challenge was accepted at 03:22.",
+    "",
+    "The successful authentication originated from",
+    "a suspicious external network and an",
+    "unrecognized device.",
+    "",
+    "Post-authentication activity confirms the",
+    "account was accessed by the attacker.",
+    "",
+    "[+] INCIDENT 0042 RESOLVED",
   ];
 }
 
@@ -444,7 +487,7 @@ if (input === "evidence") {
                 </p>
 
                 <p className="text-yellow-500 mt-3">
-                  INVESTIGATING
+                  {caseStatus}
                 </p>
               </div>
 
