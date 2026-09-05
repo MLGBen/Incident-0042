@@ -12,7 +12,8 @@ export default function Incident0042Page() {
   const [history, setHistory] = useState<TerminalEntry[]>([]);
   const [evidence, setEvidence] = useState<string[]>([]);
   const [caseStatus, setCaseStatus] = useState("INVESTIGATING");
-  const [score, setScore] = useState(0);
+  const score = evidence.length * 100;
+  const [reportReady, setReportReady] = useState(false);
 
   const discoverEvidence = (item: string) => {
     setEvidence((current) => {
@@ -20,7 +21,6 @@ export default function Incident0042Page() {
         return current;
       }
 
-      setScore((currentScore) => currentScore + 100);
  
       return [...current, item];
     });
@@ -254,6 +254,7 @@ if (input === "conclude") {
   }
 
   setCaseStatus("COMPROMISED — MFA FATIGUE");
+  setReportReady(true);
 
   return [
     "CASE CONCLUSION — INCIDENT 0042",
@@ -513,10 +514,23 @@ if (input === "evidence") {
                   ANALYST NOTE
                 </p>
 
-                <p className="mt-4 text-sm text-zinc-400 leading-6">
-                  Start with the account and authentication activity.
-                  Correlate evidence before reaching a conclusion.
+                {reportReady ? (
+              <div className="mt-4">
+               <p className="text-sm text-green-500">
+                 INCIDENT RESPONSE REPORT READY
+               </p>
+              <p className="mt-2 text-sm text-zinc-400 leading-6">
+               Investigation complete. Final findings and remediation
+               recommendations are ready for review.
                 </p>
+                </div>
+                 ) : (
+              <p className="mt-4 text-sm text-zinc-400 leading-6">
+               Start with the account and authentication activity.
+               Correlate evidence before reaching a conclusion.
+              </p>
+             )}
+
               </div>
             </div>
           </div>
