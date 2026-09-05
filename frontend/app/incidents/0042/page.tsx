@@ -12,6 +12,7 @@ export default function Incident0042Page() {
   const [history, setHistory] = useState<TerminalEntry[]>([]);
   const [evidence, setEvidence] = useState<string[]>([]);
   const [caseStatus, setCaseStatus] = useState("INVESTIGATING");
+  const [score, setScore] = useState(0);
 
   const discoverEvidence = (item: string) => {
     setEvidence((current) => {
@@ -19,6 +20,8 @@ export default function Incident0042Page() {
         return current;
       }
 
+      setScore((currentScore) => currentScore + 100);
+ 
       return [...current, item];
     });
   };
@@ -480,6 +483,16 @@ if (input === "evidence") {
                   {evidence.length} / 8
                 </p>
               </div>
+
+              <div className="border border-zinc-800 p-6">
+                <p className="text-xs text-zinc-600 tracking-widest">
+                  ANALYST SCORE
+                </p>
+
+                <p className="text-3xl mt-3">
+                       {score} / 800
+                 </p>
+               </div>
 
               <div className="border border-zinc-800 p-6">
                 <p className="text-xs text-zinc-600 tracking-widest">
