@@ -14,6 +14,7 @@ export default function Incident0042Page() {
   const [caseStatus, setCaseStatus] = useState("INVESTIGATING");
   const score = evidence.length * 100;
   const [reportReady, setReportReady] = useState(false);
+  const [reportOpen, setReportOpen] = useState(false);
 
   const discoverEvidence = (item: string) => {
     setEvidence((current) => {
@@ -523,6 +524,14 @@ if (input === "evidence") {
                Investigation complete. Final findings and remediation
                recommendations are ready for review.
                 </p>
+
+               <button
+               onClick={() => setReportOpen(true)}                 
+               className="mt-4 border border-green-500 px-4 py-2 text-xs text-green-500 tracking-widest hover:bg-green-500 hover:text-black"
+                >
+                 VIEW INCIDENT REPORT
+                </button>
+
                 </div>
                  ) : (
               <p className="mt-4 text-sm text-zinc-400 leading-6">
@@ -536,6 +545,144 @@ if (input === "evidence") {
           </div>
         </div>
       </section>
-    </main>
+             {reportOpen && (
+             <div className="fixed inset-0 z-50 bg-black/90 overflow-y-auto p-8 flex items-start justify-center">
+             <div className="max-w-4xl mx-auto border border-zinc-700 bg-zinc-950 p-8">
+             <div className="flex justify-between items-center">
+        <p className="text-green-500 text-sm tracking-widest">
+          INCIDENT RESPONSE REPORT
+        </p>
+
+        <button
+          onClick={() => setReportOpen(false)}
+          className="border border-zinc-700 px-3 py-1 text-xs text-zinc-400"
+        >
+          CLOSE
+        </button>
+      </div>
+
+      <h2 className="text-3xl mt-6">
+        Incident 0042
+      </h2>
+
+      <p className="text-zinc-400 mt-2">
+        Account Compromise — MFA Fatigue / Push Bombing
+      </p>
+
+<div className="mt-8 border-t border-zinc-800 pt-6">
+  <p className="text-xs text-zinc-600 tracking-widest">
+    EXECUTIVE SUMMARY
+  </p>
+
+  <p className="mt-3 text-sm text-zinc-300 leading-6">
+    Investigation confirmed that the employee account belonging to
+    Jordan Smith (jsmith) was compromised through an MFA fatigue attack.
+    The attacker used valid credentials, generated repeated MFA push
+    requests, and gained unauthorized access after a challenge was
+    accepted at 03:22.
+  </p>
+</div>
+
+<div className="mt-8 border-t border-zinc-800 pt-6">
+  <p className="text-xs text-zinc-600 tracking-widest">
+    INCIDENT DETAILS
+  </p>
+
+  <div className="mt-4 grid grid-cols-2 gap-6 text-sm">
+    <div>
+      <p className="text-zinc-600">Affected User</p>
+      <p className="text-zinc-300 mt-1">Jordan Smith (jsmith)</p>
+    </div>
+
+    <div>
+      <p className="text-zinc-600">Department</p>
+      <p className="text-zinc-300 mt-1">Finance</p>
+    </div>
+
+    <div>
+      <p className="text-zinc-600">Incident Type</p>
+      <p className="text-zinc-300 mt-1">Account Compromise</p>
+    </div>
+
+    <div>
+      <p className="text-zinc-600">Attack Method</p>
+      <p className="text-zinc-300 mt-1">MFA Fatigue / Push Bombing</p>
+    </div>
+
+    <div>
+      <p className="text-zinc-600">Authentication Time</p>
+      <p className="text-zinc-300 mt-1">03:22</p>
+    </div>
+
+    <div>
+      <p className="text-zinc-600">Final Status</p>
+      <p className="text-yellow-500 mt-1">COMPROMISED</p>
+    </div>
+  </div>
+</div>
+
+<div className="mt-8 border-t border-zinc-800 pt-6">
+  <p className="text-xs text-zinc-600 tracking-widest">
+    EVIDENCE & FINDINGS
+  </p>
+
+  <div className="mt-4 space-y-4 text-sm">
+    {evidence.map((item, index) => (
+      <div
+        key={index}
+        className="border-l-2 border-green-500 pl-4"
+      >
+        <p className="text-zinc-300">{item}</p>
+      </div>
+    ))}
+  </div>
+</div>
+
+<div className="mt-8 border-t border-zinc-800 pt-6">
+  <p className="text-xs text-zinc-600 tracking-widest">
+    ATTACK TIMELINE
+  </p>
+
+  <div className="mt-4 space-y-3 text-sm">
+    <div className="flex gap-6">
+      <span className="text-zinc-600 w-16">03:18</span>
+      <span className="text-zinc-300">MFA push denied</span>
+    </div>
+
+    <div className="flex gap-6">
+      <span className="text-zinc-600 w-16">03:20</span>
+      <span className="text-zinc-300">MFA push denied</span>
+    </div>
+
+    <div className="flex gap-6">
+      <span className="text-zinc-600 w-16">03:22</span>
+      <span className="text-zinc-300">MFA push accepted</span>
+    </div>
+
+    <div className="flex gap-6">
+      <span className="text-zinc-600 w-16">03:22</span>
+      <span className="text-zinc-300">Suspicious login successful</span>
+    </div>
+
+    <div className="flex gap-6">
+      <span className="text-zinc-600 w-16">03:24</span>
+      <span className="text-zinc-300">Mailbox accessed</span>
+    </div>
+
+    <div className="flex gap-6">
+      <span className="text-zinc-600 w-16">03:25</span>
+      <span className="text-zinc-300">Inbox rule created</span>
+    </div>
+
+    <div className="flex gap-6">
+      <span className="text-zinc-600 w-16">03:27</span>
+      <span className="text-zinc-300">Finance files accessed</span>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+)}    
+</main>
   );
 }
