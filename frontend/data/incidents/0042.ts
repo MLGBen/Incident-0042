@@ -56,4 +56,34 @@ evidence: [
     points: 100,
   },
 ],
+  timeline: [
+    {
+      time: "03:18",
+      event: "MFA push denied",
+    },
+    {
+      time: "03:20",
+      event: "MFA push denied",
+    },
+    {
+      time: "03:22",
+      event: "MFA push accepted",
+    },
+    {
+      time: "03:22",
+      event: "Suspicious login successful",
+    },
+    {
+      time: "03:24",
+      event: "Mailbox accessed",
+    },
+    {
+      time: "03:25",
+      event: "Inbox rule created",
+    },
+    {
+      time: "03:27",
+      event: "Finance files accessed",
+    },
+  ],
 };

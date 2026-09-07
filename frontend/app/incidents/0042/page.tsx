@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-
+import { incident0042 } from "@/data/incidents/0042";
 type TerminalEntry = {
   command: string;
   output: string[];
@@ -367,11 +367,11 @@ if (input === "evidence") {
         <div className="max-w-6xl mx-auto">
           <div className="mb-8">
             <p className="text-xs text-red-500 tracking-[0.3em]">
-              HIGH SEVERITY
+              {incident0042.severity.toUpperCase()} SEVERITY
             </p>
 
             <h2 className="text-4xl font-semibold mt-3">
-              Suspicious Employee Login
+              {incident0042.title}    
             </h2>
 
             <p className="text-zinc-400 mt-3 max-w-3xl">
@@ -383,17 +383,17 @@ if (input === "evidence") {
           <div className="grid grid-cols-3 gap-4 mb-8">
             <div className="border border-zinc-800 p-5">
               <p className="text-xs text-zinc-600">EMPLOYEE</p>
-              <p className="mt-2">Jordan Smith</p>
+              <p className="mt-2">{incident0042.employee.name}</p>
             </div>
 
             <div className="border border-zinc-800 p-5">
               <p className="text-xs text-zinc-600">USERNAME</p>
-              <p className="mt-2">jsmith</p>
+              <p className="mt-2">{incident0042.employee.username}</p>
             </div>
 
             <div className="border border-zinc-800 p-5">
               <p className="text-xs text-zinc-600">DEPARTMENT</p>
-              <p className="mt-2">Finance</p>
+              <p className="mt-2">{incident0042.employee.department}</p>
             </div>
           </div>
 
@@ -475,8 +475,7 @@ if (input === "evidence") {
                 </p>
 
                 <p className="mt-4 text-sm text-zinc-300 leading-6">
-                  Determine whether the employee account has been
-                  compromised and identify the attack method.
+                  {incident0042.objective}
                 </p>
               </div>
 
@@ -486,7 +485,7 @@ if (input === "evidence") {
                 </p>
 
                 <p className="text-3xl mt-3">
-                  {evidence.length} / 8
+                  {evidence.length} / {incident0042.evidence.length}
                 </p>
               </div>
 
@@ -496,7 +495,7 @@ if (input === "evidence") {
                 </p>
 
                 <p className="text-3xl mt-3">
-                       {score} / 800
+                       {score} / {incident0042.xpReward}
                  </p>
                </div>
 
