@@ -643,40 +643,12 @@ if (input === "evidence") {
   </p>
 
   <div className="mt-4 space-y-3 text-sm">
-    <div className="flex gap-6">
-      <span className="text-zinc-600 w-16">03:18</span>
-      <span className="text-zinc-300">MFA push denied</span>
-    </div>
-
-    <div className="flex gap-6">
-      <span className="text-zinc-600 w-16">03:20</span>
-      <span className="text-zinc-300">MFA push denied</span>
-    </div>
-
-    <div className="flex gap-6">
-      <span className="text-zinc-600 w-16">03:22</span>
-      <span className="text-zinc-300">MFA push accepted</span>
-    </div>
-
-    <div className="flex gap-6">
-      <span className="text-zinc-600 w-16">03:22</span>
-      <span className="text-zinc-300">Suspicious login successful</span>
-    </div>
-
-    <div className="flex gap-6">
-      <span className="text-zinc-600 w-16">03:24</span>
-      <span className="text-zinc-300">Mailbox accessed</span>
-    </div>
-
-    <div className="flex gap-6">
-      <span className="text-zinc-600 w-16">03:25</span>
-      <span className="text-zinc-300">Inbox rule created</span>
-    </div>
-
-    <div className="flex gap-6">
-      <span className="text-zinc-600 w-16">03:27</span>
-      <span className="text-zinc-300">Finance files accessed</span>
-    </div>
+{incident0042.timeline.map((event, index) => (
+  <div key={index} className="flex gap-6">
+    <span className="text-zinc-600 w-16">{event.time}</span>
+    <span className="text-zinc-300">{event.event}</span>
+        </div>
+      ))}
   </div>
 
 <div className="mt-8 border-t border-zinc-800 pt-6">
