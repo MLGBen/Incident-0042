@@ -615,7 +615,7 @@ if (input === "evidence") {
 
     <div>
       <p className="text-zinc-600">Final Status</p>
-      <p className="text-yellow-500 mt-1">COMPROMISED</p>
+      <p className="text-yellow-500 mt-1">{caseStatus}</p>
     </div>
   </div>
 </div>
