@@ -590,27 +590,27 @@ if (input === "evidence") {
   <div className="mt-4 grid grid-cols-2 gap-6 text-sm">
     <div>
       <p className="text-zinc-600">Affected User</p>
-      <p className="text-zinc-300 mt-1">Jordan Smith (jsmith)</p>
+      <p className="text-zinc-300 mt-1">{incident0042.employee.name} ({incident0042.employee.username})</p>
     </div>
 
     <div>
       <p className="text-zinc-600">Department</p>
-      <p className="text-zinc-300 mt-1">Finance</p>
+      <p className="text-zinc-300 mt-1">{incident0042.employee.department}</p>
     </div>
 
     <div>
       <p className="text-zinc-600">Incident Type</p>
-      <p className="text-zinc-300 mt-1">Account Compromise</p>
+      <p className="text-zinc-300 mt-1">{incident0042.incidentType}</p>
     </div>
 
     <div>
       <p className="text-zinc-600">Attack Method</p>
-      <p className="text-zinc-300 mt-1">MFA Fatigue / Push Bombing</p>
+      <p className="text-zinc-300 mt-1">{incident0042.attackMethod}</p>
     </div>
 
     <div>
       <p className="text-zinc-600">Authentication Time</p>
-      <p className="text-zinc-300 mt-1">03:22</p>
+      <p className="text-zinc-300 mt-1">{incident0042.authenticationTime}</p>
     </div>
 
     <div>

@@ -3,6 +3,9 @@ export const incident0042 = {
   title: "Suspicious Employee Login",
   difficulty: "Beginner",
   severity: "High",
+  incidentType: "Account Compromise",
+  attackMethod: "MFA Fatigue / Push Bombing",
+  authenticationTime: "03:22",
   objective:
     "Determine whether the employee account has been compromised and identify the attack method.",
 
