@@ -658,45 +658,12 @@ if (input === "evidence") {
 
   <div className="mt-4 space-y-4 text-sm">
     <div className="border-l-2 border-red-500 pl-4">
-      <p className="text-zinc-300">1. Disable compromised account sessions</p>
-      <p className="text-zinc-600 mt-1">
-        Revoke all active sessions and authentication tokens associated with jsmith.
-      </p>
-    </div>
+      {incident0042.remediation.map((step, index) => (
+       <p key={index} className="text-zinc-300">
+        {index + 1}. {step}
+       </p>
+      ))}
 
-    <div className="border-l-2 border-yellow-500 pl-4">
-      <p className="text-zinc-300">2. Reset account credentials</p>
-      <p className="text-zinc-600 mt-1">
-        Force a password reset and verify the account owner before restoring access.
-      </p>
-    </div>
-
-    <div className="border-l-2 border-yellow-500 pl-4">
-      <p className="text-zinc-300">3. Reconfigure MFA</p>
-      <p className="text-zinc-600 mt-1">
-        Re-register MFA and replace push-based approval with phishing-resistant authentication where possible.
-      </p>
-    </div>
-
-    <div className="border-l-2 border-zinc-600 pl-4">
-      <p className="text-zinc-300">4. Remove malicious mailbox changes</p>
-      <p className="text-zinc-600 mt-1">
-        Review and remove unauthorized inbox rules, forwarding rules, and suspicious mailbox configuration changes.
-      </p>
-    </div>
-
-    <div className="border-l-2 border-zinc-600 pl-4">
-      <p className="text-zinc-300">5. Review impacted Finance resources</p>
-      <p className="text-zinc-600 mt-1">
-        Determine which Finance files were accessed and assess whether sensitive data was exposed or modified.
-      </p>
-    </div>
-
-    <div className="border-l-2 border-green-500 pl-4">
-      <p className="text-zinc-300">6. Increase monitoring</p>
-      <p className="text-zinc-600 mt-1">
-        Monitor the account, source infrastructure, and related authentication activity for additional indicators of compromise.
-      </p>
     </div>
   </div>
 </div>

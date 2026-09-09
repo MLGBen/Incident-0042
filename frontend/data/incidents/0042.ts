@@ -89,4 +89,13 @@ evidence: [
       event: "Finance files accessed",
     },
   ],
+remediation: [
+"Disable compromised account sessions.",
+"Revoke all active sessions and authentication tokens associated with jsmith.",
+"Reset account credentials and force a password reset.",
+"Reconfigure MFA and review or replace push-based authentication.",
+"Remove malicious mailbox and review mailbox activity.",
+"Review impacted Finance resources and determine which Finance files were accessed.",
+"Increase monitoring for suspicious activity on the account.",
+],
 };
