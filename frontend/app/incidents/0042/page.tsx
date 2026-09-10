@@ -4,6 +4,7 @@ import { FormEvent, useState } from "react";
 import { incident0042 } from "@/data/incidents/0042";
 import AttackTimeline from "@/components/incidents/AttackTimeline";
 import EvidenceFindings from "@/components/incidents/EvidenceFindings";
+import RecommendedRemediation from "@/components/incidents/RecommendedRemediation";
 type TerminalEntry = {
   command: string;
   output: string[];
@@ -626,22 +627,8 @@ if (input === "evidence") {
 
 <AttackTimeline timeline={incident0042.timeline} />
 
-<div className="mt-8 border-t border-zinc-800 pt-6">
-  <p className="text-xs text-zinc-600 tracking-widest">
-    RECOMMENDED REMEDIATION
-  </p>
+<RecommendedRemediation remediation={incident0042.remediation} />
 
-  <div className="mt-4 space-y-4 text-sm">
-    <div className="border-l-2 border-red-500 pl-4">
-      {incident0042.remediation.map((step, index) => (
-       <p key={index} className="text-zinc-300">
-        {index + 1}. {step}
-       </p>
-      ))}
-
-    </div>
-  </div>
-</div>
 </div>
     </div>
 )}    
