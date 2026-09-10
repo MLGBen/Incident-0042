@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import { incident0042 } from "@/data/incidents/0042";
 import AttackTimeline from "@/components/incidents/AttackTimeline";
+import EvidenceFindings from "@/components/incidents/EvidenceFindings";
 type TerminalEntry = {
   command: string;
   output: string[];
@@ -621,22 +622,7 @@ if (input === "evidence") {
   </div>
 </div>
 
-<div className="mt-8 border-t border-zinc-800 pt-6">
-  <p className="text-xs text-zinc-600 tracking-widest">
-    EVIDENCE & FINDINGS
-  </p>
-
-  <div className="mt-4 space-y-4 text-sm">
-    {evidence.map((item, index) => (
-      <div
-        key={index}
-        className="border-l-2 border-green-500 pl-4"
-      >
-        <p className="text-zinc-300">{item}</p>
-      </div>
-    ))}
-  </div>
-</div>
+<EvidenceFindings evidence={evidence} />
 
 <AttackTimeline timeline={incident0042.timeline} />
 
