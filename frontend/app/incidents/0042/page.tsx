@@ -5,6 +5,7 @@ import { incident0042 } from "@/data/incidents/0042";
 import AttackTimeline from "@/components/incidents/AttackTimeline";
 import EvidenceFindings from "@/components/incidents/EvidenceFindings";
 import RecommendedRemediation from "@/components/incidents/RecommendedRemediation";
+import IncidentDetails from "@/components/incidents/IncidentDetails";
 type TerminalEntry = {
   command: string;
   output: string[];
@@ -585,43 +586,13 @@ if (input === "evidence") {
   </p>
 </div>
 
-<div className="mt-8 border-t border-zinc-800 pt-6">
-  <p className="text-xs text-zinc-600 tracking-widest">
-    INCIDENT DETAILS
-  </p>
-
-  <div className="mt-4 grid grid-cols-2 gap-6 text-sm">
-    <div>
-      <p className="text-zinc-600">Affected User</p>
-      <p className="text-zinc-300 mt-1">{incident0042.employee.name} ({incident0042.employee.username})</p>
-    </div>
-
-    <div>
-      <p className="text-zinc-600">Department</p>
-      <p className="text-zinc-300 mt-1">{incident0042.employee.department}</p>
-    </div>
-
-    <div>
-      <p className="text-zinc-600">Incident Type</p>
-      <p className="text-zinc-300 mt-1">{incident0042.incidentType}</p>
-    </div>
-
-    <div>
-      <p className="text-zinc-600">Attack Method</p>
-      <p className="text-zinc-300 mt-1">{incident0042.attackMethod}</p>
-    </div>
-
-    <div>
-      <p className="text-zinc-600">Authentication Time</p>
-      <p className="text-zinc-300 mt-1">{incident0042.authenticationTime}</p>
-    </div>
-
-    <div>
-      <p className="text-zinc-600">Final Status</p>
-      <p className="text-yellow-500 mt-1">{caseStatus}</p>
-    </div>
-  </div>
-</div>
+<IncidentDetails
+  employee={incident0042.employee}
+  incidentType={incident0042.incidentType}
+  attackMethod={incident0042.attackMethod}
+  authenticationTime={incident0042.authenticationTime}
+  caseStatus={caseStatus}
+/>
 
 <EvidenceFindings evidence={evidence} />
 
